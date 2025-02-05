@@ -1,0 +1,19 @@
+services:
+  diarization_models:
+      stdin_open: true
+      tty: true
+      container_name: diarization_models
+      build:
+        context: .
+        dockerfile: Dockerfile
+      deploy:
+        resources:
+          reservations:
+            devices:
+              - driver: nvidia
+                count: 1
+                capabilities: [gpu]
+      volumes:
+        - ./:/opt/app-root
+        # - $PWD/asr_inference_service:/opt/app-root/asr_inference_service
+        # - $PWD/pretrained_models:/opt/app-root/pretrained_models
