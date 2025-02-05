@@ -53,7 +53,7 @@ class DiarInference:
                 duration = row["end_time"] - row["start_time"]
                 speaker = row["speaker"]
                 
-                rttm_line = f"SPEAKER {start_time:.3f} {duration:.3f} <NA> <NA> {speaker} <NA>\n"
+                rttm_line = f"SPEAKER {audio_path} 1 {start_time:.3f} {duration:.3f} <NA> <NA> {speaker} <NA>\n"
                 rttm_file.write(rttm_line)
 
         return "Nemo Diarization Done"
