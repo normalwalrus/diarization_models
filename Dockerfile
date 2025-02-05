@@ -35,6 +35,7 @@ RUN python3 -m pip install --upgrade pip setuptools wheel && \
 
 #Used for initial_prompt
 RUN ["python", "-c", "from nemo.collections.asr.models.msdd_models import NeuralDiarizer; NeuralDiarizer.from_pretrained('diar_msdd_telephonic')"]
-RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='HF KEY')"]
+RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='HF_TOKEN')"]
+RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('Revai/reverb-diarization-v2',use_auth_token='HF_TOKEN')"]
 
 ENTRYPOINT [ "bash" ]

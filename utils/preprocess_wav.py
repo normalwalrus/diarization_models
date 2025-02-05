@@ -9,7 +9,7 @@ def preprocess_audio(audio_filepath, output_path):
 
 if __name__ == '__main__':
 
-    audio_filepath = 'C:\Users\User\Desktop\diarization_models\examples/finance_zoom_meeting.wav"
-    output_path = 'C:\Users\User\Desktop\diarization_models\examples/finance_zoom_meeting_processed.wav"
+    audio_filepath = "examples/finance_zoom_meeting.wav"
+    output_path = "examples/finance_zoom_meeting_processed.wav"
 
     preprocess_audio(audio_filepath, output_path)
