@@ -36,11 +36,7 @@ class DiarInference:
             split = line.split()
             start_time, duration, cur_speaker = float(split[3]), float(split[4]), split[7]
             end_time = float(start_time) + float(duration)
-            if cur_speaker == prev_speaker:
-                df.loc[df.index[-1], 'end_time'] = end_time
-            else:
-                df.loc[len(df)] = start_time, end_time, cur_speaker, ''
-            prev_speaker = cur_speaker
+            df.loc[len(df)] = start_time, end_time, cur_speaker, ''
 
         return df
     

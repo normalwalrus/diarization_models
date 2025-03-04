@@ -19,6 +19,13 @@ def main():
     for rttm_file in rttm_files_done:
         rttm_basename_done, _ = os.path.splitext(rttm_file)
         rttm_basename_done_list.append(rttm_basename_done)
+    
+    # NOTE: To be used only to let nemo catch up        
+    # nemo_rttm_files_done = [f for f in os.listdir('outputs/nemo') if f.endswith(".rttm")]
+    # nemo_rttm_basename_done_list = []
+    # for rttm_file in nemo_rttm_files_done:
+    #     rttm_basename_done, _ = os.path.splitext(rttm_file)
+    #     nemo_rttm_basename_done_list.append(rttm_basename_done)
 
     count = 0
 
