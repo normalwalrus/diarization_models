@@ -38,6 +38,9 @@ RUN ["python", "-c", "from nemo.collections.asr.models.msdd_models import Neural
 RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='HF_TOKEN')"]
 RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('Revai/reverb-diarization-v2',use_auth_token='HF_TOKEN')"]
 RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/voice-activity-detection',use_auth_token='HF_TOKEN')"]
+<<<<<<< HEAD
 RUN ["python", "-c", "from pyannote.audio import Model; Model.from_pretrained('pyannote/embedding',use_auth_token='HF_TOKEN')"]
+=======
+>>>>>>> 7b461262554b0472a400c1deaeeaf645476624a2
 
 ENTRYPOINT [ "bash" ]
