@@ -2,3 +2,4 @@
 examples/*
 ami_dataset/*
 outputs/*
+token.txt

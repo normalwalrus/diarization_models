@@ -15,5 +15,6 @@ services:
                 capabilities: [gpu]
       volumes:
         - ./:/opt/app-root
+        - /home/digitalhub/Desktop/data/diarization_benchmarks:/opt/app-root/data
         # - $PWD/asr_inference_service:/opt/app-root/asr_inference_service
         # - $PWD/pretrained_models:/opt/app-root/pretrained_models

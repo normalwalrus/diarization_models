@@ -11,7 +11,7 @@ logging.basicConfig(
 logger_nemo = logging.getLogger('nemo_logger')
 logger_nemo.disabled = True
 
-class PYANNOTE:
+class PYANNOTE_COMMUNITY:
 
     def __init__(self):
 
@@ -19,7 +19,7 @@ class PYANNOTE:
         self.device = torch.device(device)
         logging.info("Running on device: %s", device)
 
-        self.diarizer = Pipeline.from_pretrained("pyannote/speaker-diarization-3.1", token='').to(self.device)
+        self.diarizer = Pipeline.from_pretrained("pyannote/speaker-diarization-community-1", token='').to(self.device)
                 #use_auth_token=os.environ['HF_TOKEN']).to(self.device)
 
         logging.info("Pyannote model loaded!")
@@ -39,6 +39,8 @@ class PYANNOTE:
 
         logging.info("Diarization started")
         diarization = self.diarizer(audio_filepath)
+        
+        diarization = diarization.speaker_diarization
 
         with open(output_filepath, "w") as rttm:
             diarization.write_rttm(rttm)

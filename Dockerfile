@@ -1,5 +1,5 @@
 # docker build -t asr-eval/whisper-hf:1.0.0 .
-FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+FROM pytorch/pytorch:2.9.0-cuda12.8-cudnn9-runtime
 
 ENV TZ=Asia/Singapore
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -27,20 +27,21 @@ RUN python3 -m pip install --upgrade --no-cache-dir pip wheel \
 ADD requirements.txt .
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
-#ARG NEMO_VERSION=1.23.0
+#ARG NEMO_VERSION=1.23.0 
 ARG NEMO_VERSION=2.1.0
 RUN python3 -m pip install --upgrade pip setuptools wheel && \
     pip3 install --no-cache-dir Cython==0.29.35 && \
     pip3 install --no-cache-dir nemo_toolkit[asr]==${NEMO_VERSION}
 
 #Used for initial_prompt
-RUN ["python", "-c", "from nemo.collections.asr.models.msdd_models import NeuralDiarizer; NeuralDiarizer.from_pretrained('diar_msdd_telephonic')"]
-RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='HF_TOKEN')"]
-RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('Revai/reverb-diarization-v2',use_auth_token='HF_TOKEN')"]
-RUN ["python", "-c", "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/voice-activity-detection',use_auth_token='HF_TOKEN')"]
-<<<<<<< HEAD
-RUN ["python", "-c", "from pyannote.audio import Model; Model.from_pretrained('pyannote/embedding',use_auth_token='HF_TOKEN')"]
-=======
->>>>>>> 7b461262554b0472a400c1deaeeaf645476624a2
+
+RUN --mount=type=secret,id=mytoken \
+    HF_AUTH_TOKEN=$(cat /run/secrets/mytoken) \
+    python -c  "from nemo.collections.asr.models.msdd_models import NeuralDiarizer; NeuralDiarizer.from_pretrained('diar_msdd_telephonic')" \
+    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='')" \
+    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('Revai/reverb-diarization-v2',use_auth_token='')" \
+    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/voice-activity-detection',use_auth_token='')" \
+    #python -c  "from pyannote.audio import Model; Model.from_pretrained('pyannote/embedding',use_auth_token='')" \
+    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-community-1',token='')"
 
 ENTRYPOINT [ "bash" ]
