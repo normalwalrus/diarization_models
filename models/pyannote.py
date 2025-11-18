@@ -24,13 +24,25 @@ class PYANNOTE:
 
         logging.info("Pyannote model loaded!")
         
-    def diarize(self, audio_filepath):
+    def diarize_into_string(self, audio_filepath):
 
         logging.info("Diarization started")
         diarization = self.diarizer(audio_filepath)
         simple_text = ''
 
         for turn, _, speaker in diarization.itertracks(yield_label=True):
-            print(f"start={turn.start:.3f}s stop={turn.end:.3f}s speaker_{speaker}")
+            simple_text += f"start={turn.start:.3f}s stop={turn.end:.3f}s speaker_{speaker} \n"
 
-        return
+        return simple_text
+    
+    def diarize_into_rttm(self, audio_filepath, output_filepath):
+
+        logging.info("Diarization started")
+        diarization = self.diarizer(audio_filepath)
+        
+        diarization = diarization.speaker_diarization
+
+        with open(output_filepath, "w") as rttm:
+            diarization.write_rttm(rttm)
+
+        return 'Pyannote Diarization Done'
