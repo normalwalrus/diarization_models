@@ -19,10 +19,10 @@ class PYANNOTE_COMMUNITY:
         self.device = torch.device(device)
         logging.info("Running on device: %s", device)
 
-        self.diarizer = Pipeline.from_pretrained("pyannote/speaker-diarization-community-1", token='').to(self.device)
+        self.diarizer = Pipeline.from_pretrained("pyannote/speaker-diarization-community-1").to(self.device)
                 #use_auth_token=os.environ['HF_TOKEN']).to(self.device)
 
-        logging.info("Pyannote model loaded!")
+        logging.info("Pyannote Community model loaded!")
         
     def diarize_into_string(self, audio_filepath):
 

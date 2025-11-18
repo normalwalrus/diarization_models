@@ -36,8 +36,8 @@ def compute_der_for_folder(pred_dir, gold_dir):
 
 
 if __name__ == "__main__":
-    pred_dir = "outputs/pyannote/AMI"
-    gold_dir = "/home/digitalhub/Desktop/data/diarization_benchmarks/ami_dataset/rttm"
+    pred_dir = "outputs/pyannote_community_1/NSC_PART3"
+    gold_dir = "/home/digitalhub/Desktop/data/diarization_benchmarks/NSC_PART3_SPON_DIARISATION/rttm"
 
     der, report = compute_der_for_folder(pred_dir, gold_dir)
 

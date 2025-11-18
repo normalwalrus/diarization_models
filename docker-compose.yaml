@@ -6,6 +6,8 @@ services:
       build:
         context: .
         dockerfile: Dockerfile
+        secrets:
+          - mytoken
       deploy:
         resources:
           reservations:
@@ -16,5 +18,9 @@ services:
       volumes:
         - ./:/opt/app-root
         - /home/digitalhub/Desktop/data/diarization_benchmarks:/opt/app-root/data
-        # - $PWD/asr_inference_service:/opt/app-root/asr_inference_service
-        # - $PWD/pretrained_models:/opt/app-root/pretrained_models
+      secrets:
+      - mytoken
+
+secrets:
+  mytoken:
+    file: ./token.txt

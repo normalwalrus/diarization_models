@@ -1,6 +1,6 @@
-#pyannote.audio==4.0.1
+pyannote.audio==4.0.1
 soundfile==0.13.1
 matplotlib
 #pandas
 scikit-learn==1.6.1
-numpy==1.23.5
+numpy

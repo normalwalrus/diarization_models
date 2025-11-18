@@ -36,12 +36,9 @@ RUN python3 -m pip install --upgrade pip setuptools wheel && \
 #Used for initial_prompt
 
 RUN --mount=type=secret,id=mytoken \
-    HF_AUTH_TOKEN=$(cat /run/secrets/mytoken) \
-    python -c  "from nemo.collections.asr.models.msdd_models import NeuralDiarizer; NeuralDiarizer.from_pretrained('diar_msdd_telephonic')" \
-    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',use_auth_token='')" \
-    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('Revai/reverb-diarization-v2',use_auth_token='')" \
-    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/voice-activity-detection',use_auth_token='')" \
-    #python -c  "from pyannote.audio import Model; Model.from_pretrained('pyannote/embedding',use_auth_token='')" \
-    #python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-community-1',token='')"
+    HF_AUTH_TOKEN=$(cat /run/secrets/mytoken) && \
+    #python -c  "from nemo.collections.asr.models.msdd_models import NeuralDiarizer; NeuralDiarizer.from_pretrained('diar_msdd_telephonic')" \
+    python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-3.1',token='${HF_AUTH_TOKEN}')" && \
+    python -c  "from pyannote.audio import Pipeline; Pipeline.from_pretrained('pyannote/speaker-diarization-community-1',token='${HF_AUTH_TOKEN}')"
 
 ENTRYPOINT [ "bash" ]
