@@ -17,7 +17,7 @@ services:
                 capabilities: [gpu]
       volumes:
         - ./:/opt/app-root
-        - /home/digitalhub/Desktop/data/diarization_benchmarks:/opt/app-root/data
+        - /home/dhuser/Desktop/ians_test/data/diarisation:/opt/app-root/data
       secrets:
       - mytoken
 

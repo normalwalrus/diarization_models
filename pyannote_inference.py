@@ -47,23 +47,24 @@ def pyannote_inference_loop(
 
 if __name__ == '__main__':
     
-    DIARIZATION_DATASET_PATH = 'data/NSC_PART3_SPON_DIARISATION/audio'
-    PYANNOTE_OUTPUT_FOLDER_PATH = 'outputs/pyannote'
-    PYANNOTE_COMMUNITY_OUTPUT_FOLDER_PATH = 'outputs/pyannote_community_1'
-    
-    pyannote_model = PYANNOTE()
-    pyannote_community_model = PYANNOTE_COMMUNITY()
-    
-    logging.info("Pyannote Diariser v3.1 inference started!")
-    pyannote_inference_loop(
-        diarisation_dataset_folder_path=DIARIZATION_DATASET_PATH,
-        output_folder_path=PYANNOTE_COMMUNITY_OUTPUT_FOLDER_PATH,
-        model=pyannote_model
-    )
-    
-    logging.info("Pyannote Community 1 inference started!")
-    pyannote_inference_loop(
-        diarisation_dataset_folder_path=DIARIZATION_DATASET_PATH,
-        output_folder_path=PYANNOTE_COMMUNITY_OUTPUT_FOLDER_PATH,
-        model=pyannote_community_model
-    )
+    for x in [2,3,4,5,6,7,8]:
+        DIARIZATION_DATASET_PATH = f'data//NSC_PART4_OVERLAP_DIARISATION/{x}_speakers/audio'
+        PYANNOTE_COMMUNITY_OUTPUT_FOLDER_PATH = 'outputs/pyannote_community_1/NSC4_overlap'
+        PYANNOTE_DIARISER_OUTPUT_FOLDER_PATH = 'outputs/pyannote_diariser/NSC4_overlap'
+        
+        pyannote_model = PYANNOTE()
+        pyannote_community_model = PYANNOTE_COMMUNITY()
+        
+        logging.info("Pyannote Diariser v3.1 inference started!")
+        pyannote_inference_loop(
+            diarisation_dataset_folder_path=DIARIZATION_DATASET_PATH,
+            output_folder_path=PYANNOTE_DIARISER_OUTPUT_FOLDER_PATH,
+            model=pyannote_model
+        )
+        
+        logging.info("Pyannote Community 1 inference started!")
+        pyannote_inference_loop(
+            diarisation_dataset_folder_path=DIARIZATION_DATASET_PATH,
+            output_folder_path=PYANNOTE_COMMUNITY_OUTPUT_FOLDER_PATH,
+            model=pyannote_community_model
+        )
